@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="tcp," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="#tcp接口对接 最近一直在跟着老大搞一些接口对接的事情。由于接口是tcp接口，所以用到大量的关于网络编程的知识，所以做一下简单的总结。 ###开始 首先，既然是接口对接，就必须先要连接上再说，只有连接上了，你才能干想要干的事情。  基本的tcp连接，知道对方的端口和地址，直接就能连接上。 连接验证，一般对方会需要你填写用户名密码之类的东西，所以这里经常出现问题，一般是如果验证不通过，对方不会回复">
+<meta name="keywords" content="tcp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="tcp接口对接">
+<meta property="og:url" content="http://yoursite.com/2015/12/07/tcp接口对接/index.html">
+<meta property="og:site_name" content="22too">
+<meta property="og:description" content="#tcp接口对接 最近一直在跟着老大搞一些接口对接的事情。由于接口是tcp接口，所以用到大量的关于网络编程的知识，所以做一下简单的总结。 ###开始 首先，既然是接口对接，就必须先要连接上再说，只有连接上了，你才能干想要干的事情。  基本的tcp连接，知道对方的端口和地址，直接就能连接上。 连接验证，一般对方会需要你填写用户名密码之类的东西，所以这里经常出现问题，一般是如果验证不通过，对方不会回复">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-05-31T09:45:34.908Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="tcp接口对接">
+<meta name="twitter:description" content="#tcp接口对接 最近一直在跟着老大搞一些接口对接的事情。由于接口是tcp接口，所以用到大量的关于网络编程的知识，所以做一下简单的总结。 ###开始 首先，既然是接口对接，就必须先要连接上再说，只有连接上了，你才能干想要干的事情。  基本的tcp连接，知道对方的端口和地址，直接就能连接上。 连接验证，一般对方会需要你填写用户名密码之类的东西，所以这里经常出现问题，一般是如果验证不通过，对方不会回复">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2015/12/07/tcp接口对接/"/>
+
+
+
+
+
+  <title>tcp接口对接 | 22too</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">22too</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/12/07/tcp接口对接/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="22too">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="22too">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">tcp接口对接</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-07T00:00:00+08:00">
+                2015-12-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>#tcp接口对接</p>
+<p>最近一直在跟着老大搞一些接口对接的事情。由于接口是tcp接口，所以用到大量的关于网络编程的知识，所以做一下简单的总结。</p>
+<p>###开始</p>
+<p>首先，既然是接口对接，就必须先要连接上再说，只有连接上了，你才能干想要干的事情。</p>
+<ol>
+<li>基本的tcp连接，知道对方的端口和地址，直接就能连接上。</li>
+<li>连接验证，一般对方会需要你填写用户名密码之类的东西，所以这里经常出现问题，一般是如果验证不通过，对方不会回复任何消息。</li>
+<li>验证连接，对看对方给的文档，多问问对方的开发人员，因为这个步骤通了，其他的步骤也就简单了。</li>
+<li>加密验证，本次连接中，对方要求使用bluwfish加密算法做对称加密，但是blowfish加密的时候，需要自动补全字符，字符数量必须是8的整数倍，对方给的文档中没有提到，<br>他们使用什么补全，位置给了一个列子，例子中的东西也不能执行，于是只能猜，尝试无数结果，发现对方使用的ASCII的第一个字符0作为填充。这是一个不可见字符。</li>
+<li>对方返回的数据是xml结构的，所以我们就必须将信息解密之后，再进行xml解析，得到想要的数据。</li>
+<li>xml解析，解析方法有多个库，不过由于数据量比较大，并且用户多了以后数据量上升就会是数量级的，所以必须有所取舍。</li>
+<li>使用同步编程，简单的完成请求和对请求结果的处理。</li>
+</ol>
+<p>这是一个最基本的过程，当这个过程完成之后，就开始实际业务的对接处理。</p>
+<p>虽然是说是业务对接，其实是代码的第一次重构。首先确定重构的部分。</p>
+<ol>
+<li>连接部分的重构，确保连接之后不中断，和中断之后自动重试连接。这部分代码定了之后，会很少改动的，因为它处于程序的底层。</li>
+<li>数据发送和解析重构：<ol>
+<li>当然最初我们为了快速的验证接口的可用性，发送数据是一个恒定信息，面对业务时，我们需要根据具体的业务，<br>对发送的消息进行填充，简单来说，并且这样可以面对基本的业务需求。</li>
+<li>返回数据的解析，因为返回数据的确定性和不确定性，导致如果没有一个好的通用处理，将会出现很多负面的影响，<br>比如再次迭代时带来的开发速度减慢。</li>
+</ol>
+</li>
+<li><p>使用编程技巧，将网络开发变成合理的现实生活模拟。</p>
+<ol>
+<li>使用异步回调，将每一个来自前端api的请求进行回调注册，然后发送信息个tcp服务器，最终将得到的数据使用回调函数处理。</li>
+<li>tcp服务器可以被动的发送数据，同样可以主动的发送信息。被动信息使用回调处理，主动信息，直接处理，这些主动信息可能是一<br>些需要入库的数据或者是需要放入缓存的数据</li>
+<li>将所有的模块根据项目的实际用途进行划分。</li>
+</ol>
+</li>
+</ol>
+<p>再次重构</p>
+<p>重构对于后端工程师而言，是一个很大量的重构工作占据的整个项目开发的%80的时间，或许以前我很少这样认为。</p>
+<p>但是这次我真真切切的感受到了</p>
+<p>还是要感谢带我的老大，让我能每天打酱油一样的工作和不断的学习他的各种对于编程的哲学。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/tcp/" rel="tag"># tcp</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/11/06/山河故人/" rel="next" title="山河故人">
+                <i class="fa fa-chevron-left"></i> 山河故人
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/12/21/2015年终总结/" rel="prev" title="2015年终总结">
+                2015年终总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">22too</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/wangyu190810" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="info@22too.com" target="_blank" title="email">
+                      
+                        <i class="fa fa-fw fa-globe"></i>email</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">22too</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

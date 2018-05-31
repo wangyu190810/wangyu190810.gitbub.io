@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="socket," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="字节协议理解和处理理解字节协议做web的开发的程序员，经常接触http协议，http协议因为已经在多个框架中进行了实现，所以不需要距离理解http协议是如何，建立在，tcp/ip协议上实现的。仅仅需要知道，一些关于http状态码，这就成了他们对http协议的理解。 当然我们这里暂时不说http协议的具体问题，只是由http协议引出，字节协议。 http协议创建一个socket server 服务器">
+<meta name="keywords" content="socket">
+<meta property="og:type" content="article">
+<meta property="og:title" content="字节协议理解和处理">
+<meta property="og:url" content="http://yoursite.com/2017/10/19/字节协议理解和处理/index.html">
+<meta property="og:site_name" content="22too">
+<meta property="og:description" content="字节协议理解和处理理解字节协议做web的开发的程序员，经常接触http协议，http协议因为已经在多个框架中进行了实现，所以不需要距离理解http协议是如何，建立在，tcp/ip协议上实现的。仅仅需要知道，一些关于http状态码，这就成了他们对http协议的理解。 当然我们这里暂时不说http协议的具体问题，只是由http协议引出，字节协议。 http协议创建一个socket server 服务器">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-05-31T09:45:34.804Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="字节协议理解和处理">
+<meta name="twitter:description" content="字节协议理解和处理理解字节协议做web的开发的程序员，经常接触http协议，http协议因为已经在多个框架中进行了实现，所以不需要距离理解http协议是如何，建立在，tcp/ip协议上实现的。仅仅需要知道，一些关于http状态码，这就成了他们对http协议的理解。 当然我们这里暂时不说http协议的具体问题，只是由http协议引出，字节协议。 http协议创建一个socket server 服务器">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/10/19/字节协议理解和处理/"/>
+
+
+
+
+
+  <title>字节协议理解和处理 | 22too</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">22too</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/19/字节协议理解和处理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="22too">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="22too">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">字节协议理解和处理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-19T00:00:00+08:00">
+                2017-10-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="字节协议理解和处理"><a href="#字节协议理解和处理" class="headerlink" title="字节协议理解和处理"></a>字节协议理解和处理</h1><h3 id="理解字节协议"><a href="#理解字节协议" class="headerlink" title="理解字节协议"></a>理解字节协议</h3><p>做web的开发的程序员，经常接触http协议，http协议因为已经在多个框架中进行了实现，所以不需要距离理解http协议是如何，<br>建立在，tcp/ip协议上实现的。仅仅需要知道，一些关于http状态码，这就成了他们对http协议的理解。</p>
+<p>当然我们这里暂时不说http协议的具体问题，只是由http协议引出，字节协议。</p>
+<h4 id="http协议"><a href="#http协议" class="headerlink" title="http协议"></a>http协议</h4><p>创建一个socket server 服务器，在浏览器输入服务器地址和端口，可以看到服务器返回数据。</p>
+<p>这个是最简单的webscoket，不需要处理client发送过来的数据，仅仅在访问时候，将服务端数据返回。</p>
+<p><a href="https://github.com/wangyu190810/some_lang/blob/master/python/net/http_server.py" target="_blank" rel="noopener">python http 服务器端代码</a></p>
+<p>运行python 代码，启动服务器，浏览器输入:<a href="http://127.0.0.1:5000/" target="_blank" rel="noopener">http://127.0.0.1:5000/</a> </p>
+<p>可以看到返回</p>
+<pre><code>Hello, World!asdfasdf
+</code></pre><p>再看看服务端python代码：</p>
+<pre><code>#!-*-coding-utf8-*-
+import socket
+
+HOST, PORT = &apos;&apos;, 5000
+
+HOST = &apos;&apos;
+PORT = 5000
+
+&quot;&quot;&quot;http proto test&quot;&quot;&quot;
+
+listen_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+listen_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+listen_socket.bind((HOST, PORT))
+listen_socket.listen(100)
+
+
+print &apos;Serving HTTP on port %s ...&apos; % PORT
+
+while True:
+    client_connection, client_address = listen_socket.accept()
+    print &quot;client_connection&quot;, client_connection, client_address
+
+    request = client_connection.recv(1024)
+    print &quot;request&quot;,request
+
+    http_response = &quot;&quot;&quot;
+HTTP/1.1 200 OK
+Hello, World!asdfasdf
+&quot;&quot;&quot;
+    client_connection.sendall(http_response)
+client_connection.close()
+</code></pre><p><code>http_response</code> 这个字符串最终被发送给了客户端，也就是浏览器，浏览器最终展示出来的结果只有。</p>
+<pre><code>Hello, World!asdfasdf
+</code></pre><p>也就是说明：</p>
+<pre><code>HTTP/1.1 200 OK
+</code></pre><p>这行，被浏览器处理，不会显示在网页上。我们去掉这行时候，是否还能展示<em>Hello, World!asdfasdf</em>,可以自己测试一下。</p>
+<p>当然，这样的协议看似很简单。就是带上特殊的字符串。然后在返回值填写。不需要考虑字节协议。</p>
+<p>当然上面仅仅说明了http的部分协议，了解一下就行。</p>
+<h4 id="换行符协议"><a href="#换行符协议" class="headerlink" title="换行符协议"></a>换行符协议</h4><p>通俗的讲当遇到换行符，表示客户端发送消息结束，服务端处理消息，然后返回将消息以换行符结尾，返回客户端，客户端收到<br>消息，然后根据换行符截断消息，从而得到服务端具体发送数据。</p>
+<p>过程如下：</p>
+<pre><code>client -&gt; send -&gt; 换行符(\n)结束的消息
+server -&gt; recv -&gt; 收取2014字节的消息，查看消息中是否有换行符(\n)，如果有，就认为已经收到了完整的消息，
+如果没有，就继续接收 1024个消息，直到收到消息中有换行符，我们认为我们收完整的消息。
+从换行符开始阶段之前的数据，就是客户端，发送的一条完整消息。
+</code></pre><p>client伪代码实现：</p>
+<pre><code>data = &quot;message\n&quot;
+client.start()
+client.send(data)
+server_msg = &quot;&quot;
+while True:
+    recv_msg = client -&gt; recv(1024) 
+    if &quot;\n&quot; in recv_msg:
+        server_msg = recv_msg + server_msg
+        break
+print data        
+client.close()
+</code></pre><p>server伪代码实现：</p>
+<pre><code>server.start()
+while True:
+    recv_msg = server.recv(1024)
+    server.send(recv_msg)
+</code></pre><h4 id="特殊字符分割协议"><a href="#特殊字符分割协议" class="headerlink" title="特殊字符分割协议"></a>特殊字符分割协议</h4><p>使用字符分割，一般统称为字符协议（非专业术语，个人随意编撰）。</p>
+<p>当然你可以定义自己的字符协议，比如使用“—”或者“$$$”分割等。</p>
+<p>假设有如下情况：</p>
+<ul>
+<li><p>发送的字符中本来就含有这些特殊字符，判断时候，就会导致消息不完整</p>
+<p>  例如分割符号为“—” ，发送的消息体中，也有“—–”，这个时候，程序就会报错。</p>
+</li>
+<li><p>字符分割会发送无用的字符，占用空间影响效率（其实影响微乎其微）</p>
+</li>
+<li><p>并不是所有发送的数据都是字符串，使用字符穿分割，可能出现很特殊的bug，比例传送图片或者视频数据</p>
+</li>
+<li><p>非字符信息发送，需要二进制转换成字符信息，才能确定是否消息结束，当确认消息结束之后，需要再将字符消息转成二进制，保消息可以被解析。</p>
+</li>
+</ul>
+<p>对于上述的问题，就需要设计更加严谨的消息协议，应用余对应的场景。</p>
+<h3 id="二进制字符长度定义协议"><a href="#二进制字符长度定义协议" class="headerlink" title="二进制字符长度定义协议"></a>二进制字符长度定义协议</h3><p>我们有如下的需求：</p>
+<p>发送端：</p>
+<pre><code>发送一个消息，我们会告诉接收端，这个消息多长，还有消息的类型。
+</code></pre><p>接收端：</p>
+<pre><code>收取固定长度1014个字节的消息，当前消息长度在固定位置已经给出。在消息解析时候，按照发送过来的长度解析。
+</code></pre><h4 id="协议设计"><a href="#协议设计" class="headerlink" title="协议设计"></a>协议设计</h4><p>   消息长度(head)     消息数据(body)</p>
+<p>*—————-    ———</p>
+<pre><code>8                 body 
+</code></pre><p>*—————-    ———</p>
+<p>long long的最大值：9223372036854775807</p>
+<p>long long的最小值：-9223372036854775808</p>
+<p><em>设计概要</em></p>
+<p>消息头部放置本次消息的长度,长度之后的字节表示消息体</p>
+<p><em>具体设计</em></p>
+<ul>
+<li>首字符8位字节表示本次消息长度，最大的表示长度是9223372036854775807。</li>
+<li>消息体，应该不会有消息超过长度</li>
+</ul>
+<p>具体代码实现服务端和客户端</p>
+<p><a href="https://github.com/wangyu190810/some_lang/blob/master/python/net/byte_proto_server.py" target="_blank" rel="noopener">服务端</a></p>
+<p><a href="https://github.com/wangyu190810/some_lang/blob/master/python/net/byte_proto_client.py" target="_blank" rel="noopener">客户端</a></p>
+<p>客户端接收方式</p>
+<ul>
+<li>先接收8个字节的头，知道消息体长度</li>
+<li>接收消息体长度的数据。</li>
+</ul>
+<p>ps： 同样你可以接收固定长度，然后拼接数据</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/socket/" rel="tag"># socket</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/25/一生时光匆匆/" rel="next" title="一生时光匆匆">
+                <i class="fa fa-chevron-left"></i> 一生时光匆匆
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/21/python在个人工作中的应用/" rel="prev" title="python在个人工作中的应用">
+                python在个人工作中的应用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">22too</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/wangyu190810" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="info@22too.com" target="_blank" title="email">
+                      
+                        <i class="fa fa-fw fa-globe"></i>email</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#字节协议理解和处理"><span class="nav-number">1.</span> <span class="nav-text">字节协议理解和处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#理解字节协议"><span class="nav-number">1.0.1.</span> <span class="nav-text">理解字节协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#http协议"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">http协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#换行符协议"><span class="nav-number">1.0.1.2.</span> <span class="nav-text">换行符协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#特殊字符分割协议"><span class="nav-number">1.0.1.3.</span> <span class="nav-text">特殊字符分割协议</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二进制字符长度定义协议"><span class="nav-number">1.0.2.</span> <span class="nav-text">二进制字符长度定义协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#协议设计"><span class="nav-number">1.0.2.1.</span> <span class="nav-text">协议设计</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">22too</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
