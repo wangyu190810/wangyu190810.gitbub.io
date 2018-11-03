@@ -229,6 +229,696 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/12/07/tcp接口对接/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="22too">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="22too">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/12/07/tcp接口对接/" itemprop="url">tcp接口对接</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-07T00:00:00+08:00">
+                2015-12-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>#tcp接口对接</p>
+<p>最近一直在跟着老大搞一些接口对接的事情。由于接口是tcp接口，所以用到大量的关于网络编程的知识，所以做一下简单的总结。</p>
+<p>###开始</p>
+<p>首先，既然是接口对接，就必须先要连接上再说，只有连接上了，你才能干想要干的事情。</p>
+<ol>
+<li>基本的tcp连接，知道对方的端口和地址，直接就能连接上。</li>
+<li>连接验证，一般对方会需要你填写用户名密码之类的东西，所以这里经常出现问题，一般是如果验证不通过，对方不会回复任何消息。</li>
+<li>验证连接，对看对方给的文档，多问问对方的开发人员，因为这个步骤通了，其他的步骤也就简单了。</li>
+<li>加密验证，本次连接中，对方要求使用bluwfish加密算法做对称加密，但是blowfish加密的时候，需要自动补全字符，字符数量必须是8的整数倍，对方给的文档中没有提到，<br>他们使用什么补全，位置给了一个列子，例子中的东西也不能执行，于是只能猜，尝试无数结果，发现对方使用的ASCII的第一个字符0作为填充。这是一个不可见字符。</li>
+<li>对方返回的数据是xml结构的，所以我们就必须将信息解密之后，再进行xml解析，得到想要的数据。</li>
+<li>xml解析，解析方法有多个库，不过由于数据量比较大，并且用户多了以后数据量上升就会是数量级的，所以必须有所取舍。</li>
+<li>使用同步编程，简单的完成请求和对请求结果的处理。</li>
+</ol>
+<p>这是一个最基本的过程，当这个过程完成之后，就开始实际业务的对接处理。</p>
+<p>虽然是说是业务对接，其实是代码的第一次重构。首先确定重构的部分。</p>
+<ol>
+<li>连接部分的重构，确保连接之后不中断，和中断之后自动重试连接。这部分代码定了之后，会很少改动的，因为它处于程序的底层。</li>
+<li>数据发送和解析重构：<ol>
+<li>当然最初我们为了快速的验证接口的可用性，发送数据是一个恒定信息，面对业务时，我们需要根据具体的业务，<br>对发送的消息进行填充，简单来说，并且这样可以面对基本的业务需求。</li>
+<li>返回数据的解析，因为返回数据的确定性和不确定性，导致如果没有一个好的通用处理，将会出现很多负面的影响，<br>比如再次迭代时带来的开发速度减慢。</li>
+</ol>
+</li>
+<li><p>使用编程技巧，将网络开发变成合理的现实生活模拟。</p>
+<ol>
+<li>使用异步回调，将每一个来自前端api的请求进行回调注册，然后发送信息个tcp服务器，最终将得到的数据使用回调函数处理。</li>
+<li>tcp服务器可以被动的发送数据，同样可以主动的发送信息。被动信息使用回调处理，主动信息，直接处理，这些主动信息可能是一<br>些需要入库的数据或者是需要放入缓存的数据</li>
+<li>将所有的模块根据项目的实际用途进行划分。</li>
+</ol>
+</li>
+</ol>
+<p>再次重构</p>
+<p>重构对于后端工程师而言，是一个很大量的重构工作占据的整个项目开发的%80的时间，或许以前我很少这样认为。</p>
+<p>但是这次我真真切切的感受到了</p>
+<p>还是要感谢带我的老大，让我能每天打酱油一样的工作和不断的学习他的各种对于编程的哲学。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/11/06/山河故人/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="22too">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="22too">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/11/06/山河故人/" itemprop="url">山河故人</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-11-06T00:00:00+08:00">
+                2015-11-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>##山河故人</p>
+<p>####声明，尽量减少没有剧透，不会影响观影</p>
+<p>最早听说贾樟柯的时候，可能还是看到大家推荐《三峡好人》，不过一直没有看完，原因很简单，普通话，<br>再加上个人没有耐心。</p>
+<p>后来偶然看到《天注定》，突然明白为什么中国的很多电影是禁片了，简单的描述当前的事实，和情节的重现，<br>充分描述这个社会基本层面上的人，是如何生活的。他们有着怎么样的情感，这些人就是一个时代的缩影，在<br>历史的洪流冲，激起一朵无谓的浪花。不管如何，我们都艰难的活着，因为我们知道自己还是很期待未来，期待<br>看着这些浪花激起的巨浪荡涤一切尘埃。</p>
+<p>看盗版毕竟是不好的，但是没办法你上不了，我只能看盗版了，知道你出了《山河故人》，我就觉得，我要去看了，<br>看看影院上映的你。</p>
+<p>没有什么特殊期待，就好像电影的名字一样，我知道不会有什么好，也不会有什么不好，但是我知道，这个温暖的<br>名字就让能静静的安静下来。</p>
+<p>到了电影院，我以为会有很多人知道这部电影，知道贾樟柯，但是看了一下，我有安静了，原来我是少数派。</p>
+<p>坐我右边的是两个年轻的美女，左边是一个美女，左边的边看边吃，右边的安安静静的看电影(一个人不安静行吗？<br>哈哈哈)</p>
+<p>####现在想来一句台词都不记得了</p>
+<p>电影开场，突然感觉自己回到了小学时代，小时候从来没想过自己能够上大学，仅仅觉得每天能不去放牛在家看<br>动画片就是人生最美好的事情。</p>
+<p>过年时候，每年过年都会有社火，一群来自山外(家乡秦岭腹地，对于不是本县的人，一律称之为山外人)的人来<br>村里表演舞狮子，每次我都会跑到跟着跑大半夜，一直听着震天的锣鼓和霹雳啪啦的鞭炮。有时胆子大了，就趁狮<br>子不注意，轻轻的摸狮子一下，虽然知道是假的，但是还是会怕狮子回头咬我。</p>
+<p>谁没有年轻过，穷人孩子早当家，当然也会早熟，于是初恋就不期而至。看着《山河故人》中三个年轻人的三角关<br>系，就知道当年自己也可以像晋升一样的牛脾气，也可以像梁子一样沉稳。面对一个让自己着迷的女生，总是那样<br>疯癫若狂。即使我们不想选择命运，命运最终也是给出结果，成长就是一副中药(随手黑)，能治病，同样也会给人<br>留下后遗症，渐渐不会像之前那样癫狂，也不会像之前那样痛苦纠结。</p>
+<p>死亡是生命的终点，这些年渐渐的清晰，很多亲人的离世，作为小辈的我，总是需要不断的重复对来吊唁的亲友磕头，<br>小时不明白，只知道亲人每次都哭得很凄惨，只知道有个亲人住进了草丛中的坟墓，以后只能过节的时候去给烧点<br>纸钱。渐渐的长大，亲人还在不断离世。自己也加入了成年人的队伍，开始为葬礼做一些小小辈们必须做的事情，比<br>如穿寿衣，摸着冰冷的躯体，再次知道，这个曾经整体和我们生活在一起的人，永远的离开了，他们再也不用去烦恼<br>世间的苦难，不用体会人情的冷暖，他们再次开启了新的旅程。然后留下我们艰难的活着，思考着人生的路，走着人<br>生的路。</p>
+<p>现在大学毕业了来北京吸雾霾，离家也进了，之前在东北上学，不过感觉自己还是很长时间不能回家。总是想着，有<br>机会就要呆两天，但是想想自己来回的在家也就能呆上一天，所以总是拖着，总想着总有一天，我就要回家了，回家<br>工作，离家近点一切都会好的。</p>
+<p>一切都会好的，这点我是及其相信的</p>
+<p>也许是一个人习惯了，这些年经常成了家里人半个月给我打一个电话。我很少主动打电话，除了要生活费。亲人之间<br>不能说有隔阂，但是不在同一个圈子，自己做一些事情，总是会被他们担心，所以尽量不让他们知道，比如你在朋友圈<br>“发一个求包养”，或者发送“迟早要干这帮孙子”，马上家里人就会电话来，让你删帖，突然有种“查水表”的感觉。</p>
+<p>隔阂是个永远的话题，没有碰撞，没有了解，自然也不会有理解。</p>
+<p>多多的走进他们的生活，给他们手把手的教智能手机的使用，和他们把微信当成对讲机使，向他们科普朋友圈各种<br>谣言如何戳穿。</p>
+<p>给他们讲讲，自己的工作，自己的生活，自己认识的人，自己去过的地方，自己吃过的美食，然后带着还不算老迈的<br>他们去出去看看。</p>
+<p>回到电影，看到忘年恋那段，右边边的两个美女的，唏嘘了，左边的美女一直很安静。</p>
+<p>电影结束了，不过上文好像和电影没有什么太大的关系。</p>
+<p>不过这就是我的山河故人，也是这部电影的一切.</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/11/03/转正的流程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="22too">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="22too">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/11/03/转正的流程/" itemprop="url">转正的流程</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-11-03T00:00:00+08:00">
+                2015-11-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>作为一个应届毕业生，入职三个月多了，这些时间感觉自己的成长是极其迅速的。</p>
+<p>压力总是让人成长，工作中遇到的问题首先自己努力解决，感觉自己能力有限，及时的反馈自己遇到的问题，这样既能保证工作进度，又能使得遇到的问题被快速的解决，从而自己的提高工作效率。</p>
+<p>感谢那些工作中给无数我帮助的同事，因为有了你们，让我更加的相信和确定，公司充满强大的凝聚力。</p>
+<p>初到在北京工作十分庆幸，能来到这里和大家一起奋斗，一起面对挑战，一起承担压力，一起分享喜悦，一起收获成功。创业充满艰难险阻，但是我们的目标永远都是星辰大海。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/09/30/《熔炉》/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="22too">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="22too">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/09/30/《熔炉》/" itemprop="url">《熔炉》</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-09-30T00:00:00+08:00">
+                2015-09-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>#熔炉</p>
+<p>###我们这样努力，不是为了改变世界，而是努力不让世界改变我们</p>
+<p>今天偶然去翻了一下豆瓣，看看有没有什么房子可以租住，翻着翻着就翻到一个<br>帖子：《那些值得看的电影》，然后有人就说了一句，看了《熔炉》不想再看第二遍。</p>
+<p>于是自己百度了一下，发现竟然没有网站可以看，只能去百度云了一下，找到了电影，看完了</p>
+<p>人物名字，似乎总是会被我忘得一干二净，每一次都是看完电影我都不会记得名字的。</p>
+<p>我时常也在想，如果有一天，我不能保卫我的家人，不能使用法律去维护自己的权益，我<br>应该怎么办？</p>
+<p>我瞬间想到了移民，但是我觉得有些事情不会发生在我身上的，所以就是想想而已，再说自<br>己也不可能移民，根本就是痴人说梦而已。</p>
+<p>###继续加油</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/09/30/2015中秋节/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="22too">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="22too">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/09/30/2015中秋节/" itemprop="url">2015中秋节</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-09-30T00:00:00+08:00">
+                2015-09-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>#2015年中秋节</p>
+<p>###最头疼过节</p>
+<pre><code>独在异乡为异客，每逢佳节倍思亲。遥知兄弟登高处，遍插茱萸少一人。
+</code></pre><p>大学几年对于节日没有什么重大的概念，因为除了能多睡个懒觉之外，貌似没有其他的事情可以做了。<br>因为大家都在一起，天天都在一起，所以不会想到太多关于思念的话题，尽管也会思念家人，但是那<br>种孤独单来的不是那样强烈。</p>
+<p>今天是忙碌的一天，早晨起来搬家，没有什么东西，所以一次就完事了，然后在新的住所睡会午觉，<br>但是当我到达新的住所时，我竟然奇迹般的迷路了，这个我真的没有想到，突然那个时候有一种很<br>强烈的眩晕感，这样的眩晕感，就和以前第一次去深圳一样，出门硬是找不到回家的路了，<br>但是总结起来原因，可能就是自己心理还是那样稚嫩，不能承受生命的中的那份孤独感，尤<br>其是在烈日下，阳光让我的孤独无所遁形，从而迷失了自己的神智。</p>
+<p>找房子总是无数的体验，这样的体验你不知道是好还是坏，因为你总是感觉自己会不断的发现新世界，<br>不断的看在这个城市蜗居的人如何将自己的生命，在狭小的空间之内展现的淋漓尽致。然而我和他们一样，<br>从而将自己的生命中的一部分时间，来换取我认为对等的阅历和钱财。</p>
+<p>###青春是什么？</p>
+<p>经常感叹年华易逝，感叹生命无常，所以我觉得每个时刻，我们都应该尽力去做自己想做的事情，<br>努力的生活，让自己的生命变得不那样平凡，仅仅认为的不平凡就可以了。</p>
+<ol>
+<li><p>去旅行，去看不同的世界。尽管看到的风景你都能在别人的照片或者网络视频上看到，但是<br>我们还是要自己去努力经历，在张家界的吊桥上，领略到原来自己的恐高症如此的严重，然而<br>自己一直都没有发现。去海边吹吹海风，感受着无边的大海，闻着海水腐烂的一丝气息，你能<br>真真切切的感觉到，内心对于忧郁的这个词的更深一层理解。不断的前行，不断的增加自己<br>人生的阅历。</p>
+</li>
+<li><p>多看书，看好书。</p>
+<pre><code>然我们的生命总是有限的，
+有限的时间，
+我们及时很努力去经历一些事情，
+但是时间总是无情的，
+无息的，
+流逝，
+不见。
+</code></pre><p> 那就去看别人的生活，他们的生活也成了我们自己的体验，也成了自己的财富。</p>
+</li>
+<li><p>感受他人，用心交流，网络时代，习惯了使用各种软件来代替交流</p>
+</li>
+</ol>
+<p>经常去不同的小餐馆吃饭和老板聊聊天，</p>
+<p>去不同的小地方游玩看看原始的山山水水还有那留守在乡间的人们</p>
+<p>这些人都是这个网络时代我们不能接触到的，但是他们身上却拥有中华的几千年文化气息，无论是好的还是坏的</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/09/05/工作两个月有感/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1295,771 +1985,11 @@ cargo.toml中添加了依赖，所以我们仅仅添加当前依赖就行了
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/05/05/毕业前的一些杂记/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="22too">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="22too">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/05/05/毕业前的一些杂记/" itemprop="url">毕业前的一些杂记</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-05-05T00:00:00+08:00">
-                2015-05-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>##最近很累</p>
-<hr>
-<p>从甜品离开之后，这段时间一共干了这样几件事</p>
-<blockquote>
-<ul>
-<li>上线了<a href="http://www.ufindoffer.com" target="_blank" rel="noopener">游必有方</a>,时间一直持续了从三月到前几天，我一直在做后端。</li>
-<li>去了一趟湖南，张家界玩的好爽，不过对于恐高的我来说，真是惊险刺激，终身难忘啊。</li>
-<li>在西安和朋友玩了几天。</li>
-<li>回到学校开始弄毕业设计，不得不说，毕业设计自己的选题很坑，不过也快要做完了。</li>
-<li>五一假期去了内蒙，吃了很多的沙子，不过玩的也是很爽，感觉大学生户外游O2O，这个还是可以做的。</li>
-</ul>
-</blockquote>
-<p>关于学习</p>
-<hr>
-<p>本来打算回来之后好好学习一下JavaScript，但是发现自己基本东西看完之后，还是不能很快的利用他，<br>直到最近blog改版，才在管理后台用了一些ajax的东西，不得不说学习这种事情在我这里，就是要不断<br>的将学到的东西进行运用才能获得好的效果。</p>
-<p>最近在看rust，我也是一只跟风狗，我不知道rust将来会发展成什么样子，但是总是觉得自己需要学习一门系统<br>级语言，c/c++ 感觉自己是废了，对java无爱，虽说自己最爱python，但是在面对很多需要速度和并发的事情<br>时，我不得不放弃python</p>
-<p>毕业设计中有一项是：《读书笔记》，刚刚开始时，我不知道自己想写什么东西，随意的抄写了几篇自己之前的blog，<br>后来想想，还是认真一点，把自己平时想学一直没有认真学习的东西总结抄写一下吧，</p>
-<blockquote>
-<ul>
-<li>nginx ，自己一直在用，但是仅仅用在了自己的blog上，细节的东西自己不了解</li>
-<li>PostgreSQL ，本博客就是用的PostgreSQL，做了一些基础搭建的总结</li>
-<li>xss , 必须要理解一些安全的知识，以前仅仅是知道，现在要学着怎么去避免，不能单纯的依赖框架</li>
-<li>sql注入攻击 ，这个之前在公司的就告诉我不要拼sql字符串，看了sql注入攻击的例子终于明白了怎么回<br>事了，以后尽量提高自己数据库的知识</li>
-<li>git分支管理，自己玩git一直都是个人单机版。所以分支策略几乎可以说是没有，看了<a href="http://limboy.me/tech/2011/02/25/git-workflow-with-blog-demo.html" target="_blank" rel="noopener">分支管理明白</a><br>是怎么回事了，每个分支要怎么命名。hotfix分支的使用，release分支的产生，这些都是自己单机时候不能<br>很好学习的东西。</li>
-<li>redis , 一直要给自己的blog上redis，但是无奈自己的阿里云太次，于是实战的机会就暂时没有了，虽<br>然给<a href="http://www.ufindoffer.com" target="_blank" rel="noopener">游必有方</a>上了部分的redis，效率提升百分之50左右（仅仅是部分<br>get操作的api），真正的nosql是没有利用，这里表示以后需要加强。</li>
-</ul>
-</blockquote>
-<p>关于生活</p>
-<hr>
-<p>工作的事情现在基本定了，就是想离家近点，不知道这几年在外是不是磨灭了自己的斗志，但是我觉得不是</p>
-<p>我仅仅是想家了</p>
-<p>清明时节，本来是应该回家祭祖时候，但是自己好几年都没回去了，记得我在高中时候都是要回家祭祖的，现在突然发现自己好几年都没有去过了</p>
-<p>八月十五，应该是在家和老妈老爸唠嗑劳动的时节，但是自己却在异乡，唯有通过电话寄托思念，不知道他们的未来还能有多少个圆满的节日</p>
-<p>春节，匆匆而来匆匆而去，一年又一年，我自己的白发慢慢变多，老爸老妈的头发也是慢慢失去光泽，成长的压力<br>让我们成了一个成年人，去为自己的所爱支撑一片天空，聚少离多，和自己的亲人在一起才是美好的人生</p>
-<p>老妈说想我了，我就希望自己能在下个周末回家，给她戴上各种她没吃过的东西和老爸聊聊一些工作上的事情，让<br>他们时刻感觉到我就在这里不离不弃。</p>
-<p>关于学业</p>
-<hr>
-<p>马上大学要结束了，想想自己有什么遗憾的事情吗？总结一下吧</p>
-<blockquote>
-<ul>
-<li>奖学金，就得了一次科技奖学金，也算是大学拿过奖学金了</li>
-<li>挂科， 貌似大学除了第一学期没有挂，最后一学期没有挂，其他的每学期都挂了</li>
-<li>女朋友，这个吗？随缘吧，</li>
-<li>玩，自己真的玩爽了，大多时候是自娱自乐</li>
-<li>朋友，大学有几个朋友足矣，好吧，我的好朋友有点多，可能因为自己的性格太过随和了，但是能和这帮逗<br>比成为朋友是我三生有幸（上辈子几百次的回眸）</li>
-<li>其实还想读研的，不过想想还是算了，自己还是工作吧</li>
-<li>其实大家喜欢叫我“坑”，因为都被我坑过，不过他们习惯了</li>
-</ul>
-</blockquote>
-<p>可能就这些了吧</p>
-<p>毕业时候再来一些感慨吧</p>
-<p>为了生活，为了幸福，我们不断前行，我们相信自己。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/04/08/坑/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="22too">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="22too">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/04/08/坑/" itemprop="url">坑</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-04-08T00:00:00+08:00">
-                2015-04-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>数据库定义为varchar，</p>
-<p>我竟然使用int，</p>
-<p>太坑了，</p>
-<p>检讨一下，</p>
-<p>浪费半天时间</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/03/06/时间不尽，后会有期/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="22too">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="22too">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/03/06/时间不尽，后会有期/" itemprop="url">时间不尽，后会有期</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-03-06T00:00:00+08:00">
-                2015-03-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>实习了七个月，终于离职，这一刻感到的是不舍和轻松</p>
-<p>没有了每天的时间很紧张的感觉，睡到自然醒，然后起来看看想吃什么，刚刚还在烙饼</p>
-<p>毕竟我来公司的时候公司研发也只有四个人，我们一共才14个人，</p>
-<p>现在研发10个人，公司人数现在31个，自己也算是公司的老人了</p>
-<p>真的很舍不得这个环境，毕竟每一个人都是那样熟悉</p>
-<p>找很多同事和领导谈了一下对自己的看法和有什么需要叮嘱我的</p>
-<p>总结下面几条</p>
-<pre><code>1.公司给的任务，自己觉得有可能不太清楚的，一定要问清楚，不要觉得是这样，
-就是这样，最后做出来了，领导说“不对”，你说，“白纸黑字你写的”，即使最后自己
-没有被责罚，但是我们多问一句，这个问题就不会出现
-
-2.自己接到一项任务，看看这些任务要调用那些人，调用那些资源，先把所有的资源
-过一遍，看看大概什么时间可以准备齐全，自己时刻跟进自己的任务，时刻保持和他
-人的沟通，不要犹豫，不要妞妞捏捏
-
-3.一项任务完成了，不要觉得这就完事了，不是的，你还有很多事情要做的，跟进
-这个任务的后续任务或者你觉得可能的连带任务
-
-4.做好每一条数据，上线之前多做几次check，直到自己认为没有问题，再去让需求check，
-不要因为自己没时间check而把任务丢给需求方，这样工作进度明显会被拖慢。
-
-5.及时沟通，遇到问题说出来，即使很傻B的问题，问多了，自己就不傻了，也能更好的开展工作
-
-6.多跟自己的领导交流，而不是领导找你，这样工作心情也是会很愉快的
-
-7.英语，学好自己的英语，程序员不会英语怎么可以！
-
-8.现在还有时间，多玩玩，好好玩几个月，下来就没有机会了！
-
-9.不管什么时候回来，甜品人都是你的家人
-</code></pre><p>时间不尽，后会有期</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/02/03/创建属于自己的linux命令/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="22too">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="22too">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/02/03/创建属于自己的linux命令/" itemprop="url">创建属于自己的linux命令</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-02-03T00:00:00+08:00">
-                2015-02-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>经常使用ssh或者使用需要随时登录mysql，总是需要一步一步的输入命令然后输入，输入密码，即使这样的一个动作，敲得时间长了，我就烦了，在想能不能使用python写一个，然后在任何位置都能直接登录或者执行登录输入密码</p>
-<p>直接登录这样的事情，我暂时没有做，我做成了链接到你的ssh服务器，然后输入密码，好吧，我只是想玩玩，感觉仅仅提高了我百分之零点一的工作效率。</p>
-<p>通常我们会这样做</p>
-<pre><code>ssh 888@www.888.com
-</code></pre><p>然后输入密码，尽管可以自动提示，但是每次大这样几个字，我还是觉得有点多</p>
-<p>我希望这样</p>
-<pre><code>888
-</code></pre><p>然后输入密码，完成登录</p>
-<p>使用python实现，线上目录结构</p>
-<pre><code>├── go
-│   ├── __init__.py
-│   └── go.py
-└── setup.py
-</code></pre><p>看看setup.py的源码</p>
-<pre><code>from setuptools import setup
-
-setup(
-        name=&quot;Sshgo&quot;,
-        version=&quot;0.1.0dev&quot;,
-        packages=[&quot;go&quot;],
-        entry_points={
-            &quot;console_scripts&quot;:&quot;&quot;&quot;
-                888 = go.go:main
-            &quot;&quot;&quot;,
-        },
- )
-</code></pre><p> 我们创建了这样一个文件，name表示这个软件的名字，也就是你使用<code>pip list</code>查看到的名字</p>
-<p> <code>`version</code>表示版本号，<code>packages</code>表示你的包名，<code>`entry_points</code> 里面的东西就是你的命令名字和你的包名和执行函数</p>
-<p>我们看看go.py里面的东西，</p>
-<pre><code>import os
-
-def main():
-    os.system(&quot;ssh 888@www.888.com&quot;) 
-</code></pre><p> 这个时候我们就完成了我们的命令创建</p>
-<pre><code>python setup.py install 
-</code></pre><p> 完成安装，现在就可以使用888命令了</p>
-<p> <a href="https://github.com/wangyu190810/code/tree/master/studycmd" target="_blank" rel="noopener">代码地址</a> 这个也是一个例子</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/01/27/linux服务器重启之后postgresql 无法启动/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="22too">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="22too">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/01/27/linux服务器重启之后postgresql 无法启动/" itemprop="url">linux服务器重启之后postgresql 无法启动</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-01-27T00:00:00+08:00">
-                2015-01-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>postgresql 重新启动 linux<br>先找到安装目录（使用编译安装）<br>然后在postgre账户下面</p>
-<pre><code>./pg_ctl start -D /user/local/pgsql/data
-</code></pre><p>此时应该可以成功登陆了</p>
-<p>但是我的提示</p>
-<pre><code>postgres@AY140721213320376387Z:/usr/loca/pgsql/bin$ ./pg_ctl start -D /usr/local/pgsql/data
-server starting
-postgres@AY140721213320376387Z:/usr/loca/pgsql/bin$ LOG:  could not     bind IPv4 socket: Address already in use
-HINT:  Is another postmaster already running on port 5432? If not,     wait a few seconds and retry.
-LOG:  database system was shut down at 2015-01-27 11:53:59 CST
-LOG:  database system is ready to accept connections
-LOG:  autovacuum launcher started
-</code></pre><p>说是我的5432端口被占用，查看被谁占用</p>
-<pre><code>ostgres@AY140721213320376387Z:/usr/loca/pgsql/bin$ lsof -i
-COMMAND   PID     USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
-postgres 2214 postgres    3u  IPv6  14552      0t0  TCP     *:postgresql (LISTEN)
-postgres 2214 postgres    7u  IPv4  14562      0t0  UDP localhost:    46020-&gt;localhost:46020
-postgres 2216 postgres    7u  IPv4  14562      0t0  UDP localhost:    46020-&gt;localhost:46020
-postgres 2217 postgres    7u  IPv4  14562      0t0  UDP localhost:    46020-&gt;localhost:46020
-postgres 2218 postgres    7u  IPv4  14562      0t0  UDP localhost:    46020-&gt;localhost:46020
-postgres 2219 postgres    7u  IPv4  14562      0t0  UDP localhost:    46020-&gt;localhost:46020
-postgres 2220 postgres    7u  IPv4  14562      0t0  UDP localhost:    46020-&gt;localhost:46020
-</code></pre><p>还是没有发现，切换到具有sudo权限的账号执行：</p>
-<pre><code>sudo lsof -i:5432
-COMMAND   PID        USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
-postgres 1266 postgres-xc    3u  IPv4  10239      0t0  TCP     localhost:postgresql (LISTEN)
-postgres 1266 postgres-xc    4u  IPv4  10240      0t0  TCP     localhost.localdomain:postgresql (LISTEN)
-</code></pre><p>发现问题，postgres-xc 这个账户占领了5432</p>
-<pre><code>postgres-xc@AY140721213320376387Z:/usr/loca/pgsql/bin$ lsof -i:5432
-COMMAND   PID        USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
-postgres 1266 postgres-xc    3u  IPv4  10239      0t0  TCP localhost:postgresql (LISTEN)
-postgres 1266 postgres-xc    4u  IPv4  10240      0t0  TCP localhost.localdomain:postgresql (LISTEN)
-</code></pre><p>杀到他。</p>
-<pre><code>postgres-xc@AY140721213320376387Z:/usr/loca/pgsql/bin$ kill 1266
-</code></pre><p>然后</p>
-<pre><code>postgres@AY140721213320376387Z:/usr/loca/pgsql/bin$ ./pg_ctl start -D /usr/local/pgsql/data
-
-server starting
-postgres@AY140721213320376387Z:/usr/loca/pgsql/bin$ LOG:  database system was shut down at 2015-01-27 11:58:33 CST
-LOG:  database system is ready to accept connections
-LOG:  autovacuum launcher started
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2105,7 +2035,7 @@ LOG:  autovacuum launcher started
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">58</span>
+                  <span class="site-state-item-count">63</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2118,7 +2048,7 @@ LOG:  autovacuum launcher started
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-count">34</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
