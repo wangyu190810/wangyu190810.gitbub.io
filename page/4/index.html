@@ -229,6 +229,645 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/11/安装rustup/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="22too">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="22too">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/02/11/安装rustup/" itemprop="url">安装rustup</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-11T00:00:00+08:00">
+                2017-02-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="关于rust的一些学习总结"><a href="#关于rust的一些学习总结" class="headerlink" title="关于rust的一些学习总结"></a>关于rust的一些学习总结</h1><p>因为墙的存在所以，经常出现资源无法下载</p>
+<h2 id="安装rustup"><a href="#安装rustup" class="headerlink" title="安装rustup"></a>安装rustup</h2><p><em>当前在ubuntu16.04下执行</em></p>
+<p><a href="https://www.rust-lang.org/en-US/" target="_blank" rel="noopener">rust</a>官网安装时，会让你下载rustup初始化文件</p>
+<p>按照要就执行：</p>
+<pre><code>curl https://sh.rustup.rs -sSf | sh
+</code></pre><p>不过因为墙的存在，直接执行上面的命令会失败,所以仅仅执行如下命令：</p>
+<pre><code>curl https://sh.rustup.rs -sSf     
+</code></pre><p>会生成一个 <em>rustup-init.sh</em> 文件，打开当前文件：</p>
+<p>会看到变量:</p>
+<pre><code>RUSTUP_UPDATE_ROOT=&quot;https://static.rust-lang.org/rustup/dist&quot;
+</code></pre><p>将这个变量后边的地址进行替换，这个地址为中国科学技术大学官网：</p>
+<pre><code>RUSTUP_UPDATE_ROOT=&quot;https://mirrors.ustc.edu.cn/rust-static/rustup/dist&quot;
+</code></pre><p>然后执行:</p>
+<pre><code>bash rustup-init.sh
+</code></pre><p>等待执行完成，输入如下命令：</p>
+<pre><code>rustup
+
+rustup 1.0.0 (17b6d21 2016-12-15)
+The Rust toolchain installer
+
+USAGE:
+    rustup [FLAGS] [SUBCOMMAND]
+
+FLAGS:
+    -v, --verbose    Enable verbose output
+    -h, --help       Prints help information
+    -V, --version    Prints version information
+...
+</code></pre><p>安装成功</p>
+<p>也有可能无法找到rustup命令，执行下面命令刷新环境变量：</p>
+<pre><code>cd ~/.cargo/
+source env
+</code></pre><p>当然最后是将上述命令添加到用户环境变量中,所以仅仅执行如下命令：</p>
+<pre><code>vim ~/.bashrc
+</code></pre><p>下面这句写入文件：</p>
+<pre><code>export PATH=&quot;$HOME/.cargo/bin:$PATH&quot;
+</code></pre><p>rust开发环境搭建完成</p>
+<p>十分感谢 <a href="https://lug.ustc.edu.cn/wiki/server/mirrors/start" target="_blank" rel="noopener">中国科学技术大学开源软件镜像</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/23/2016年终总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="22too">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="22too">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/01/23/2016年终总结/" itemprop="url">2016年终总结</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-23T00:00:00+08:00">
+                2017-01-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="2016年终总结"><a href="#2016年终总结" class="headerlink" title="2016年终总结"></a>2016年终总结</h1><p>年终总结这样的的东西，一点要写，为什么呢？因为自己发现脑袋已经不好使了，不记录下自己过去一年都干了什么，<br>以后可能给人吹牛逼的时候，别人真以为你在吹牛。</p>
+<p>总结：</p>
+<ul>
+<li>一个字总结，“累”</li>
+<li>两个字总结，“成长”</li>
+<li>三个字总结，“来年我还能再战”。貌似超过三个字了。</li>
+</ul>
+<p>去年的年初目标：</p>
+<ul>
+<li><p>今年一定要出去旅行，去哪都行，就是想出去看看。</p>
+<p>  然而自己也就中秋节去了重庆一趟，然后貌似在就哪里都没去了。</p>
+<p>  然后很低调的也没有发朋友圈。当然重庆之行，是很美好的记忆。</p>
+</li>
+<li><p>找个女朋友</p>
+<p>  个人的时间，在这一年中似乎被工作挤占的几乎全无。所以也就没时间了去思考自己的未来。</p>
+<p>  人生未来的伴侣是一件很重要的事情，所以还是要多去认识不同的人，多了解不同的人。</p>
+</li>
+</ul>
+<p>2016年的变化：</p>
+<ul>
+<li><p>个人成长</p>
+<p>  这一年来，成熟了很多。不管是在处理工作上的事情，还是处理自己的事情.</p>
+<p>  专业技能，这个可能觉得自己不错了，不过仅仅是自己觉得，很久都没怎么学习新的东西了，这个是很可怕的，对于我们行业而言，不学习意味着淘汰，意味着你过了三十就要转行。</p>
+</li>
+<li><p>心态方面</p>
+<p>  人的成熟最开始是生理上的，然后才是心理上的，一直想着什么时候能做到宠辱不惊，肯能老了的时候吧。</p>
+<p>  自负或者自大，这个是一个可怕的事情，我们总以为我们可以做的很好，我们是自己的主宰，我们也能主宰其他我们认为我们熟知的事情，幸好生活简单的给我一个巴掌，告诉我，<br>  下次就不是巴掌这样简单了。谦虚，奋进，谦虚，奋进。</p>
+</li>
+</ul>
+<p>貌似2016年的总结要从2016年2月开始写，或者说阴历过完年开始写</p>
+<p>过完年，回到北京，开始工作，现在想想，貌似工作的事情，没有什么值得纪念，因为过于平淡，但是平淡才是生活的全部，激情仅仅是生命对你最华贵的馈赠。</p>
+<p>##三四月<br>离职了好几个同事，大家吃吃喝喝，然后都说以后有时间一起玩，不过慢慢的发现北京太大了，真的没有什么机会了。</p>
+<p>##四五月份<br>春天是个很棒的季节，作为北方，北京的春季应该也不会差，当时貌似一直在加班，没有出去玩，也没有出去看看。<br>就去了一趟十三陵，看着整个大明王朝最后的这些痕迹，感慨万分，也许每个朝代都是这样吧。</p>
+<p>##六月<br>带我的老大离职了，我也就慢慢的扛起整个项目，我还记得那个月，同事介绍我一个女孩子，让我去看看，我就去看了，然后本来约得人家周五晚上吃饭，我都下楼了，准备赴宴的途中，<br>领导打个电话，让我回来开会。。。</p>
+<p>我回去开会了，然后就没有然后了。然后那个女孩子永远的留在我的朋友圈，然后就是偶尔点一下赞了，只要不走上微商的道路，我觉得我还是没有必要拉黑的（唉，拉黑这样的事情，<br>还是要看人，毕竟很多朋友都在做，要是都拉黑了，那就基本看不见朋友圈动态了）</p>
+<p>##七月<br>抽时间去了一趟圆明园，感觉不错，真的不错，自己一个人的感觉真的很自由，找个平坦的地方小憩一下，看着那些没有开放的荷花，想着自己要是带个小网抖，还可以捞点小🐠带回家放盆<br>里养着。给不常联系的朋友发了微信，随便聊聊，感觉那就是幸福，阳光下，柳树下，石阶上，上串下跳，就怕见路不平一声吼了，自己一个人，没人会把我当疯子，幸福可能就是这样子。<br>就是太短暂，不过现在尤其是冬季想起来，总觉得那一刻是那样的清晰。</p>
+<p>朋友之前离职了，我让他来北京，我带他学习it，他过来了，本来想着让他学习python，最后发现还是php好学，就教他学习，然后我也渐渐的学习了php。<br>买了一辆二手自行车，没事就出去逛逛，然后最远的一次，到了十三陵水库，不过那是九月多的事情了。</p>
+<p>##八月<br>天上掉下个女朋友，然后我没有珍惜，然后又没有然后了。周六加班，那天下雨，我们和一帮同事去吃饭，然后我背后的女生，突然就躺地上了。同事把机会让给我了，让我去英雄救美，<br>我救了，人家留了我的电话。然后同事们都在感叹，这吃一个饭，就能吃到一个女朋友，也是挺好的。后来一天，女生给我发信息，请我吃饭，但是我前一天约了另外的朋友吃饭，我就说<br>下次吧，昨天约了人，然后再次没有然后了。</p>
+<p>同时八月应用开始上线，我们也正式开始忙起来了，很多事情，很多东西要做，那一段时间，现在想想，都会对自己膜拜，毕竟一个东西，要重新设计，并且是业务类型的东西，必须知道<br>业务的很多知识，写了改，改了写，写了改，改了写。最终正常上线。那可能是我努力的样子，同样是我青春的样子。</p>
+<p>##九月<br>去了重庆，吃了火锅，看到了美女，同样拿到了今年最高的一天步行记录，18000步，岁月在变，人也在变，不过能确定的是，看见你那一刻，真的好开心。</p>
+<p>不知道，是你在不断的变成我喜欢的样子，还是你变成什么样子我都喜欢。</p>
+<p>回来之后，貌似那几天感冒了，打了吊瓶。</p>
+<p>朋友在我这里待了三个月，家里有事，然后回家了，因为我的工作比较忙，所以他很多东西都是自学，三个月也算是入门了。</p>
+<p>##十月<br>十一假期坚守岗位，写了好几天代码，大家回来上班的时候，我趁着周六休假一天，骑着单车去奥林匹克转了一圈，我现在还能记得那天阳光很足，但是风还是有点冷，然后我才意识到，<br>再次秋天了，夏天什么时候过去的？我很好奇。</p>
+<p>当然，十月，我也经历了人生最大的考验，写的东西产生了一个bug，用户的账目出现错误，差额在十多万，当时第一次查的时候，简单算了一下貌似几十万，当时心情，现在想想都能<br>感觉到冰凉。经过同事的帮助，最终把所有问题解决，解决完成的时候，都已经凌晨5点，“你见过凌晨4点的中关村吗？”，同事可以回答“见过，上次被一个傻逼队友坑了，看见了<br>五点的中关村”。</p>
+<p>##十一月<br>很平淡的一个月，很简单的三十天，约朋友吃饭，工作，也无其他事。冬天还是很冷的，不过那些天，我还能看见金黄色的银杏树。</p>
+<p>##十二月<br>滑雪，滑雪。今年滑雪两次，第一次去南山滑雪场，感觉很棒，雪道多，场地大，就是太远了，来回不方便。</p>
+<p>第二次是和大学同学一起滑雪，真的玩的很爽，晚上滑雪回来，去网吧游戏了，突然发现毕业之后，我们的交集也就是游戏了，不想谈工作，不想谈学习（有研究生），但是游戏是永恒<br>的主题。</p>
+<p>圣诞节前夕，老妈生病住院，我请假回家了。接完电话，买了最近的票，和领导请假，将手上的工作交出去，收拾东西，去火车站，这一切都好像在心中模拟练习了无数遍，那一刻充满了<br>逃离的喜悦，也有一丝丝担心，因为我知道，老妈仅仅是病了，不会是什么大的问题的。快到了打了电话，妈妈说，过来接我，我说不用，我去医院找她，远远的在楼下，我看见了，一个<br>矮小的老太太，为什么突然她就老了，为什么突然她就变得矮小了，时间是最没有感情的东西，看着我们成长，看着他们变老。   </p>
+<p>到医院问了医生，医生说“年龄大了，要注意不要过度操劳，补充营养，年龄大了，很多病都会找上来，需要慢慢调理”。家就是那种真实，不会有太多期待，同样，不会失望，他就在<br>那里。</p>
+<p>因为工作需要，在家待了几天会回家了，后一天就是生日。走的时候，妈妈说别忘了，“明天生日”。爸爸打电话“明天生日，吃点好的。”，第二天到北京了，哥哥发了红包给我“生日怎么玩？”，<br>低调的和朋友吃了一顿饭，以前可能会大肆庆祝，今年的时候，突然感觉自己就要奔四了，沉浸在这样的痛苦中不能自拔。</p>
+<p>##一月</p>
+<p>去天津，看朋友，坐在公交上，太瞌睡了，靠着她的肩膀睡着了。</p>
+<p>明天回家，过年！</p>
+<p>一年有苦有乐，记住每一个小小的幸福，时间还早，未来还长。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/22/我们拿什么对抗世界/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="22too">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="22too">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/01/22/我们拿什么对抗世界/" itemprop="url">我们拿什么对抗世界</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-22T00:00:00+08:00">
+                2017-01-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="我们拿什么对抗世界"><a href="#我们拿什么对抗世界" class="headerlink" title="我们拿什么对抗世界"></a>我们拿什么对抗世界</h1><p>今天高中同学来北京玩，给我发了微信，然后我们见了一面。</p>
+<p>然后回顾青春，在简单的说了自己现在的状况，以及工资，个人比较反感工资问题，毕竟我就这样一点隐私了。</p>
+<p>然后又聊到了女朋友问题，问我现在有没有女朋友，我说没有，然后又开始讨论怎么找女朋友问题，我突然意识到，</p>
+<p>到底是我要求太高，还是别人看不上我。然后我就陷入了纠结之中。</p>
+<p>先说别人看不上我：</p>
+<ul>
+<li><p>我有什么，我什么都没有，真的是什么都没有，从当前的物质生活而言，没车没房</p>
+</li>
+<li><p>个人习惯太差，比如个人生活习惯严重懒散</p>
+</li>
+<li><p>胖，这个在努力减肥，不过减肥比我想的要难的多。</p>
+</li>
+<li><p>丑，我就不信，你们比我帅？</p>
+</li>
+</ul>
+<p>再说说自己的考虑：</p>
+<ul>
+<li><p>毕竟，你是要和我过一生的人，你可以不漂亮，但是我们必须有一致的价值观，毕竟我们活着不仅仅是或者，我们有各自存在的意义，而不是仅仅为了存在</p>
+</li>
+<li><p>89年生，现在我也不算了。别人算出来是多少岁那就是多少岁。我害怕错过，也怕找到一个不合适的人，毕竟我觉得婚姻是我唯一的目的了。</p>
+</li>
+<li><p>回家和不回家，到底是在北京工作？还是会陕西工作？这个都是问题，也都不是问题。</p>
+</li>
+<li><p>你遇见了我，我不希望你的生活质量下降，因为我是替你抗风雨来的。所以必须不断的强大，强大我可以为你挡开世界一切的险恶和帮你克服所有困难。</p>
+</li>
+</ul>
+<p>上面这些东西，自己想的很清楚，不过自己的圈子太小了。</p>
+<p>唉，人生啊，叹息吧，回家相亲吧。</p>
+<h2 id="为了改变世界？还是为了不让世界改变我们。"><a href="#为了改变世界？还是为了不让世界改变我们。" class="headerlink" title="为了改变世界？还是为了不让世界改变我们。"></a>为了改变世界？还是为了不让世界改变我们。</h2><p>总觉得自己刚刚毕业，一切才刚刚开始，我的人生还没有应该说出认命这两个字。</p>
+<p>总觉得自己努力，就能得到自己想要的东西，毕竟我在努力，毕竟我智商够用。</p>
+<p>突然想着自己要是过上了一眼就能看见五十年以后的生活的日子，我觉得貌似人生没有意义啊，我不能给自己制造可能性，<br>但是我还是要给我的孩子们制造可能性。有时我们再聊阶级固化问题，我自己都不能给自己的孩子带来一个美好的未来，<br>我能求孩子们自己改变吗？</p>
+<p>我有能力，我能给自己带来改变，能给家人带来希望，我看不清自己的未来，但是我知道，我在进步，我在前行。</p>
+<p>如果我看见了永恒的未来，那说明我真的老了，心态老了，人也就老了。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/26/关于十一月/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="22too">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="22too">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/11/26/关于十一月/" itemprop="url">关于十一月</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-26T00:00:00+08:00">
+                2016-11-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="关于十一月"><a href="#关于十一月" class="headerlink" title="关于十一月"></a>关于十一月</h1><p>时间总是比我们想的要快。</p>
+<p>依旧记得今天刚刚过完年，就和同事说，我一定不要错过春天的美景，我要出去踏青。然后没去成，因为天天加班。<br>六月多了，说我要下海游泳，然后加班，然后就没有然后了。<br>十一月了说要去看爬山赏秋景，倒不是因为加班了，是因为雾霾和自己一个人，不想出门。</p>
+<p>总觉得自己有时间，总觉得自己马上就能上路，谁知因为一个“穷”字，放到了我。</p>
+<p>十一假期，在公司加班五天，这些事情，有时想想挺可怕的，这不是我想要的生活，并且这里没有我的理想。</p>
+<p>上个星期有一天夜里，早晨六点多，突然感觉自己呼吸困难，赶紧坐起来，从桌子上拿回自己的手机，握在手里，准备这时刻拨打120。</p>
+<p>过了一会，感觉舒服了，然后也比较困，就睡着了。</p>
+<p>当时最怕的是，我打完120，然后我要是休克了，120也找不到我，那个时候，感觉也许人生就是一口气没有突然没有吸进去，然后就跪了。</p>
+<p>那天起床，然后镇定的去上班，好像一切都没发生一样，还和朋友在群里扯淡，说“我昨天晚上，差点跪了，准备周六去做个检查”。 朋友打来电话，<br>“你赶紧去医院看看，过几天去医院，什么玩意都检查不出来了!” .自己想想也是，接完电话，然后离开公司，去了一趟公司旁边的医院。</p>
+<h2 id="和医生交流的过程"><a href="#和医生交流的过程" class="headerlink" title="和医生交流的过程"></a>和医生交流的过程</h2><p>检查的过程，比较漫长，我怕心脏有问题，我就直接告诉医生，然后医生做个关于心脏的检查，躺在检查床上，医生用仪器在我身上检查，</p>
+<p>我听见医生对另外一个医生说，“你去把陈大夫叫过来，他是这方面的专家”。</p>
+<p>然后我心中大喊“wocao，不是真的要跪了吧”。</p>
+<p>然后去找人的医生回来说：“陈医生帮病人做检查，正在忙，没时间”。</p>
+<p>“那你把张教授叫过来，他是咱院的招牌，啊，小伙子，你别担心，我们就是让其他大夫过来看看，没事！”。</p>
+<p>我突然感觉，我的生命开始了倒计时，都把招牌拿出来了，我还不死？</p>
+<p>“张教授来了！”。</p>
+<p>“张教授你给看看，你再给这个小伙子做个检查。小伙子别怕，张教授经验丰富。”</p>
+<p>然后我在等待着审判，等待着结果，不过那时候真的做好了，我不能死在病床床上啊，我要出去旅行，我要捐献眼角膜，我要。。。</p>
+<p>小伙子，没事，身体很健康，你昨天出现的状况，应该是你昨天晚上吃多了，出现了食管倒流问题，以后晚上少吃点，或者不吃。<br>（我和医生说，我前一天和朋友出去一直吃到11点多，吃了好多）</p>
+<p>拿着诊断结果，安心的回公司了。回到公司预约了体检。</p>
+<h2 id="去体检"><a href="#去体检" class="headerlink" title="去体检"></a>去体检</h2><p>因为之前一直没有做过除了学校之外的体检，所以就想着做个全面一点的体检。感觉有必要检查的，都检查了一遍。</p>
+<p>其他检查都没有问题，到了最后对检查结果确认的时候。医生说我“你的胆上有个息肉，需要进一步做个检查，因为在胆上，<br>并且这个东西癌变的概率很大，所以你再做个检查吧，我给你开单子，你去交一下钱”。</p>
+<p>当时都下尿了，前两天被医院的医生吓了一下，现在又有可能是癌了，那种心情，真的是自己的后事都准备好了。</p>
+<p>交完钱，然后采血，然后最后再确认一次，整个检查结束。</p>
+<p>回家等报告单。</p>
+<h2 id="胖"><a href="#胖" class="headerlink" title="胖"></a>胖</h2><p>胖了真的不好，为什么不好。</p>
+<p>体检时先要抽血，护士姐姐说，“你这太胖了，这个扎完针都不出血啊，来换右手胳膊”。</p>
+<p>“不能扎手背吗？”，想着一会还要会去写代码，要是两个胳膊都被扎了，那就废了。</p>
+<p>“先扎胳膊，要是不行，我们再来扎手背”。还完果然就好了。</p>
+<p>最后一个胆的上的那个息肉要化验，需要采血，就是针扎指头尖的那种。</p>
+<p>“来伸手”，还没感到疼，已经扎完了,然后需要将血液采集到玻片上（就是高中生物学上的那个玻片）。”不行啊，你这血有气泡啊，你是不是血脂过高啊？”</p>
+<p>我愣了一下，这个好像不是我血脂过高，美女是你的手法不对吧。</p>
+<p>“来拿出你的另外一只手” 。我还没有反映过来，她再次扎了我一针。</p>
+<p>“嗯，这次不错，刚刚的也不知道什么问题”。我只能默默的看着我的手了。</p>
+<p>我一共挨了四针。</p>
+<p><em>体检结果，一切正常，体重偏胖，加强运动。</em></p>
+<h2 id="可能总会倦怠"><a href="#可能总会倦怠" class="headerlink" title="可能总会倦怠"></a>可能总会倦怠</h2><p>最近这几天不太忙了，所以有时间胡思乱想。</p>
+<p>开始考虑自己职业生涯问题，我到底想要什么，我有没有准备好离职</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/05/成长的脚步/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1116,596 +1755,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/04/23/铁打的营盘，流水的兵/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="22too">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="22too">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/04/23/铁打的营盘，流水的兵/" itemprop="url">铁打的营盘，流水的兵</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-04-23T00:00:00+08:00">
-                2016-04-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>#铁打的营盘，流水的兵</p>
-<p>也许自己还是一个孩子，其实自己早就不是了。</p>
-<p>金三银四，离职和入职在这两个月，出现了很多次。老的员工离开，新的员工到来。</p>
-<p>可能我这人天生不喜欢离别，但是有期待离别，毕竟一成不变不是一个好的事情，尝试改变。</p>
-<p>#离职</p>
-<p>目前就职的公司是一个创业公司，我来的时候，正是公司最顺风顺水的日子。一切都很好。<br>后来公司业务因为政策原因，公司的决策层，对用公司的很多东西作出了调整。领导层进行了减薪处理，<br>普通员工也有一部分因为公司政策离职或者被辞退。不过大家都还是很有希望的努力着。那个时候10月多。<br>到了今年过完年，公司内部有三分之一提出了离职。有几个是公司到现在的元老。</p>
-<p>通常大家意义上的离职，就是在别人总结的时候， 可能会有很多情况，自己经常嬉笑着说，无非就是钱多事少，离家近，<br>但是也无非就是下面几类：</p>
-<ul>
-<li>自己干着不爽</li>
-<li>看不到未来</li>
-<li>其他</li>
-</ul>
-<p>当前就职公司，是我的第二家公司，第一家是我在深圳实习时是去的公司。那个公司的年轻人，给了一个新的世界，<br>让我深刻的认识到。原来我们可以距离牛人这样近，我觉得这些牛人真的很厉害。我想着跟着他们能有一番新的天地。</p>
-<p>不过什么是资本市场？什么是生活？让我更加迫切的认识到，原来这一切都不是那样的简单，老板真的不是好当的。</p>
-<p>上家公司，由于要回学校办理毕业的事情，我离职了，这之后不久，公司也就解散了。这个让我感到措手不及。<br>突然开始重新思考？什么样子才能真的办好一个公司？什么样子的公司才能不断的活下去。然后创造出更大的价值。<br>毕竟那个是我的第一家公司，公司的每一个人，都记得很清楚。现在想想总是感恩，让我认识了那人，他们给我带来了新的世界。</p>
-<p>当前的公司，还记的当时是在python群里面，发了一个求职信息。然后有人和我私聊，然后就到公司聊聊，<br>发现挺好的，当时和CTO聊完，也就完事了。直接拿到了offer，其他的东西，我也没有关心，不过公司也是很好的帮我解决了。</p>
-<p>过完年，公司很多同事提出了离职，离职的直接原因是：公司提出周六要来上班，不过这也不能算什么原因，<br>另外一个是因为年终奖问题。</p>
-<p>##聚餐，吐槽</p>
-<p>离职的同事请吃饭，于是我们都去吃了，席间公司同事吐槽公司，我也将自己的情绪带入进去了。吃完饭，自己也在思考良多。</p>
-<ul>
-<li>为什么公司就不能对老员工好点？</li>
-<li>为什么在一些制度上不能人性化一点？</li>
-<li>为什么对部分员工不信任？</li>
-</ul>
-<p>回来之后，和公司的另一个同事聊天，提到上述问题，他也做了解释，确实让我又有了新的认识。</p>
-<ul>
-<li>老板要想很多问题，谁都不想成为冷冰冰的机器，但是还是要有人成为狼,要不然，羊群会全部灭亡的。<br>总要打压一些老人，新人才能快速的上位，并且新人，整个系统才是有活力的系统，但是也不能亏待老人，<br>毕竟他们将青春献给了工作。</li>
-<li>既然是制度了，制度制定的初衷，就是为了让每一个人平等的遵守,不会因为他是谁？而面对不同的惩罚<br>或者逃脱惩罚</li>
-<li>毕竟你要离职了，公司也没有什么能够制约你的措施了，再说先前有很多的先例。有同事在离职式，对<br>公司产品的一些改动，导致了无法挽回的损失，并且还没有证据证明是故意为之。所以可能自己以后要是<br>离职了，就要面对这些东西了。做好必要的交接，写好必要的东西，无愧于心。</li>
-</ul>
-<p>##释怀</p>
-<p>公司就是工作的地方，不是你生活的地方，你要热爱你手上的工作，但是你也要分清楚，什么是工作，<br>什么是生活？</p>
-<p>少加班，多运动，认真干好自己的工作，追求极致的完美操作。</p>
-<p>这是最好的时代，年轻的我们，只要努力，就会有得到我们想要的东西的希望或者一个美满的结果。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/02/28/回乡见闻/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="22too">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="22too">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/02/28/回乡见闻/" itemprop="url">回乡见闻</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-02-28T00:00:00+08:00">
-                2016-02-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="回乡见闻"><a href="#回乡见闻" class="headerlink" title="回乡见闻"></a>回乡见闻</h1><p>我们也不知道自己能在这个世界上存活多久，同样我们也不能预知自己的未来，但是至少有一点可以肯定<br>那就是我们知道我们有信息迎接每一个明天，也许这就是这个阶段最大的幸福了吧</p>
-<p>不知道是不是老年人才热爱回忆，因为已经无法改变现状，但是感觉自己最近也开始做一些奇奇怪怪的<br>梦，全部是关于过去，关于周围的亲朋友好友一些时光回忆和对他们未来的担忧。</p>
-<p>###我的生活</p>
-<p>也许“凤凰男”的本质已经在我这里表露无疑，来自偏远的农村，上了大学，离开家乡，不能算是<br>有多好，不过已经是一个令人满意的结果了。想想那些当年一起放牛的“尿尿和泥玩泥巴”的朋友，<br>如今多少都断了联系，只有过年在家时，彼此喝酒扯淡，肆意玩笑。但是我们从来不会问候彼此，<br>你过得怎么样？因为生活的残酷在彼此所处的环境表现的完全不一致。</p>
-<p>也许他们必须为了真真实实的生存，努力挣扎，那些真真实实的汗水低落在脚下，当然共同点都是<br>极端的情况下，我们都会选择哭泣来解决眼前的困境。但是哭过了，问题还在，生活还是要继续。</p>
-<p>大学开学时，我上学的钱是借的，一共带了5000块钱。由于办了助学贷款，所以学费是不包括在<br>5000之内的，那个时候，父亲在医院住院，之前在工地伤了脚趾，我当时看到医生的建议是“如果<br>不进行有效的及时处理，可能需要截掉小拇趾脚趾”，诚然我宽慰自己，应该没事，就好像这些年自己的大病小病一样，会<br>正常的恢复过来，仅仅留下难以磨灭的疤痕。然后医院住了两天，为了省钱，就回家养伤了，<br>但是在炎热的夏天最终感染，导致截掉小拇趾，在家偶然给父母洗脚，看着仅剩四只脚趾的脚，我<br>总是无声的应对，当然这也个家庭的经济带来了空前的困境。</p>
-<p>这几天有时会想到大学二年级的时候，过年回家的争吵，争吵的原因莫过于大学带给家庭的转变，<br>那个时候，哥哥还没有结婚，我还在大学荒废我的时间，然而哥哥没有回家，所以必然过年的气氛<br>骤然变得有点奇怪。那几天已经明显的感觉到了火药味，但是无法避免。有一天看电视时，家里<br>邻居家的孩子也在（名牌大学毕业好几年了，在河北工作），争吵开始了，无非就是关于大学对<br>家庭经济带来暂时的无法缓解的困境。但是争吵也是一种很好的沟通方式。</p>
-<p>现在大学毕业了，也算是我和家人都熬出头了，但是关于逼婚的节目又开始上演了。</p>
-<p>###关于发小</p>
-<p>回家必然要和发小一起扯淡打麻将，然后我们就能从一个发小的口中知道，其他发小的情况，唯一可<br>能不变的就是结婚的还是比较少，尽管大家都是二十六七岁了。</p>
-<p>每个人都有注定的命运，从出生那一刻就注定了，当时这仅仅因为我宿命论的坚定支持者，而一起次<br>直接让我们看到变化结果的，可能就是小学升初中，初中升高中，高中升大学，大学毕业。</p>
-<p>每一个人都正在按照早就注定好的命运前行</p>
-<p>小学时，我们一起的有七八个人一起待到初中毕业，那个时候可能注定关于交集，可能就是家乡和春季了。</p>
-<p>本来想着写一下每个人的生活画像，不过发现不是我想的那样简单，因为每个人的故事，我可以写出来<br>大几千字了，写的少了，必然是对生活的概括，但是概括出来的东西不是生活的全部。所以可能以后每个<br>人都会有自己的画像，画的认真而透彻。</p>
-<p>###过年在家</p>
-<p>表哥再婚了，这是一件喜事，对于家族的人而言。然后表哥依旧每次都要喝酒，喝的大醉，喝完就开始从<br>自己的认知层面开始抱怨周围的人和事，每次都是我在的时候喝成那样，这也让我很难受，我没法劝阻，<br>我也不知道要干什么去，也许应该找个角落抽支烟，打发一下无聊的时间和那些对生活的咒骂。</p>
-<p>哥哥过年没有回家，过年就似乎有点冷清了，不过也不算冷清，毕竟朋友知道我回家了，回到我家来玩。</p>
-<p>在太阳下晒着太阳，这是最爱的活动，因为我们那里还是比较冷的，但是午后的阳光，一直是我觉得生活<br>最美好的部分，尤其是在冬日，柔和而微暖。</p>
-<p>我爱午后的阳光，还记2014年的夏天，我在深圳的某天大马路旁边的草坪上，睡了两个多小时，听着车来<br>车往，感觉蚂蚁在耳边爬动。</p>
-<p>听说要开发旅游区，于是将我们道路两旁的土地全部征收了，每年每亩地600元，全部种植油菜，等待春天<br>的油菜花海来招揽游客，当然事情都是有两面性，至少我们看到有人去做了，即使不做也没关系。</p>
-<p>###初八结婚</p>
-<p>初八这天，我的三个朋友结婚。但是因为要上班，所以一个都没有来得及去。</p>
-<p>第一个是我的发小，每年过年都会在我家玩，和我一起去庙上烧香拜神，她<br>的妻子是高中她同学，一直到了大学毕业，终成正果。由于妈妈在他们家帮忙，所以我不用出份子钱，因为<br>我的资格不够，这些东西都要大人出面的。祝福他们白头偕老。</p>
-<p>第二个是我的高一时的同班同学，因为我的哥哥和她的姐姐是同学，并且是一个班级的，我和她也是同学，<br>所以就显得格外的亲切，不过我可能为人太多的冷漠，或者是特立独行，我在高中的几个朋友，全是我初<br>中就认识的朋友，所以可能会显得她和我不太亲密，就好像，很多人都和我不太亲密一样。她说要结婚了，<br>我说好快啊。结婚的男方也是我的同班同学。他们怎么走到一起的我还是比较了解的。祝愿他们白头偕老。</p>
-<p>第三个是我的高中同桌，结婚的女方是我的小学同学，不过从来没有在过一个班。他们的故事，从初中，<br>到高中，到大学，直到结婚，想想在一起应该十年了。他当我的同桌，是我高中复读的那年，我看着他每天<br>都在纠结中度过，因为他的女朋友，已经大一了，他还在高强度压力下的复读，异地恋是也许真的是最痛苦的。<br>当时看着他的样子，我真的没想到他们能坚持下来。终能修成正果，确实是他们努力的结果。祝福他们白头偕老</p>
-<p>因为工作原因，我都没去，但是我觉得我看着他们，我觉得原来，爱情比我们想的简单，唯一不简单的就是坚持。</p>
-<p>###自己</p>
-<p>依旧孑然一身，不过好处就是能独立的思考，思考人生三大终极问题。然后<br>夜晚来临，回到住处洗澡睡觉，觉得一天就着一样过去了，总感觉生活应该<br>不是这样的。</p>
-<p>2016年，什么也不清楚，都说经济会越来越困难。不过我还是相信，勤劳一点，<br>我们还是能吃饱饭，照顾好家人。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/18/信仰问题/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="22too">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="22too">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/01/18/信仰问题/" itemprop="url">信仰问题</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-01-18T00:00:00+08:00">
-                2016-01-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>#不断的行动，不断的思考</p>
-<p>上周本来计划去朋友家玩，但是由于中途改变计划，所以我去了河北的一个寺庙。</p>
-<p>对于信仰，我是一个宿命论者，我相信一切的一切早早就已经注定</p>
-<pre><code>注定遇见，
-注定离别
-
-注定飞黄腾达，
-注定默默无闻
-</code></pre><p>不过我一直努力的做着一些事情，比如学习，比如思考和前行，因为我不知道什么事情是注定，<br>什么事情是具有选择条件的注定。</p>
-<p>但是我知道，我喜欢什么，我努力追寻什么。</p>
-<p>不过有时我也不知道。</p>
-<p>当不知道怎么前进时，大多我们选择麻痹自己的神经，让自己不再思考，让工作或者生活的疲惫压抑我们，<br>让自己时刻去体验，活在为温饱奋斗的第一线。</p>
-<p>###寺庙中的人们</p>
-<p>中国几千年的文化传统，在现代社会的冲击和一些极端手段的打压下，几乎所剩无几，于是那些年过半百的人，没有生命的依托，<br>已经是半截入土的人，由于缺失信仰，他们的精神世界在极度的无所事事下，闲的更加的忙不，更加不知所措。</p>
-<p>借宿寺庙一宿，屋子里住了四个人加上我。<br>我们就用甲乙丙丁来表示，我就是丁</p>
-<p>甲河北人，年龄55岁，距离寺庙三个小时车程，自己开车过来的。在寺庙中呆了好几个月，每天帮忙给寺庙做工。算是居士，他妻子也在寺庙中做饭。<br>问及经常在寺庙的原因：</p>
-<pre><code>儿子没有结婚，没孩子带，
-工作现在就处于几个月都不上班，因为没活干，领着最低工资，
-在家没事干，来寺庙修修庙，积功德，
-因果论者。
-</code></pre><p>乙河北人，年龄55岁，距离寺庙三个小时车程，坐朋友车过来。夜宿寺庙第二天回家，当天刚刚皈依佛门：</p>
-<pre><code>懂得玩微信和支付宝，
-待人极其热情，
-很迷信一些生死伦，
-信仰佛教的目的是死后能转世轮回。
-</code></pre><p>丙河北人，年龄53岁，距离寺庙九个小时车程。和朋友一起过来，是我们四个人中，唯一的青衣弟子，也就是俗家弟子。</p>
-<pre><code>没有太深的了解，
-虔诚的弟子，
-对于佛经能有自己的认识和见解
-</code></pre><p>丁陕西人，也就我，</p>
-<pre><code>仅仅是觉得佛教的神秘，
-去看看而已，体会佛教如何利用心理学制造自己的体系。
-开始理解什么叫“修行”
-修：日复一日，
-行：行动，思考
-</code></pre><p>###文化信仰</p>
-<p>一直不理解这届，工作的重点是什么，知道看到寺庙，直到这些人告诉我一些不确定来源的信息，渐渐明白，其中的一个工作重点就是如何让这代人<br>拥有自己的信仰，而无害余社会，但是又能保持积极的生活。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/12/21/2015年终总结/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="22too">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="22too">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/12/21/2015年终总结/" itemprop="url">2015年终总结</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-21T00:00:00+08:00">
-                2015-12-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>#2015年终总结</p>
-<p>也许习惯了，每年都会写一些东西，今天和朋友偶然聊起，今年还是11天就结束了。2015年，这一年发生了许多事情，<br>唯一庆幸的是没有太悲伤的事情，最让我伤感的可能是大学毕业了。</p>
-<p>学生时代的结束，对于我而言，是一个重大的转折，这个转折点来的有点突然，我一直以为我已经准备好接收这个时刻的到来。<br>直到现在，我才知道，我还在逃避，逃避内心的孤独感，以及让自己适应这场在他人看来最平常不过的变故。</p>
-<p>###一月<br>回学校进行了大学的最后一场考试，不过那场考试也就为了回东北去玩而已，去了哈尔滨，玩的相当开心，<br>考试吗？开卷考前将重点看看做个笔记就完事了(看什么书，不可能，和一帮人打游戏才是最重要的事情)。</p>
-<p>###三月<br>辞了实习，然后开始做外包，外包这件事，让我深深的理解了，如果有个一个直接的女上司太可怕了，项目陆陆续续的做了一个月，</p>
-<p>###到了四月<br>因为一些事情，休假一周，去了湖南，看看寝室的哥们，然后去了张家界，张家界让我再次知道我的恐高症有多严重。<br>然后回学校，继续做外包，项目不到五月，基本上线，不过bug无数。也总算摆脱的这场噩梦，天天写代码，时时刻刻都在写代码，代码写到自己都要吐了。</p>
-<p>###五月，<br>毕业设计已经进行了大半，但是我拥有的却是很多的伤感，毕竟马上也毕业了，总感觉一切都将变得陌生，变得措不及防。<br>和寝室的哥们打打游戏，吃吃喝喝。当然没有烂醉如泥。不过伤感还在不断进行。</p>
-<p>###六月，<br>准备毕业答辩，带我毕设的老师一直催我，但是我就是提不起精神，伤感还在继续，最终一帮哥们催促下，完成了一份看似无所谓的毕业设计。<br>还去了吉林市的基督教堂，我不是基督教徒，去看的原因是，这所教堂是哥特式建筑，总想着去米兰看看欧洲文艺复兴时期的哥特式建筑。<br>我是无神论者和宿命论者。</p>
-<p>###七月<br>答辩那天没有什么精彩或者感慨可言，写了好几个月的东西，最终可能就是不到半个小时完成了大学最后的功课。领取毕业证那天，我遇见了马同学，<br>总感觉她是一个天使一般的孩子，虽然不在同一条线上，但是我永远会记得那天的阳光，和阳光下我们的影子。<br>到了北京，开始面试，开始找工作，开始考虑租房子，一切都开始了。幸好大学的同学在北京的多，感谢他们帮助，让我刚开始的几天工作还是比较顺利的</p>
-<p>###八月<br>也许就是工作工作，适应工作，适应环境</p>
-<p>###九月<br>还是工作工作，公司进行了一轮裁员，客户部全部裁掉了，就剩一个客服经理，编制到了运营部。</p>
-<p>###十月<br>继续工作工作，十一哪里也没有去，就在家呆着。</p>
-<p>###十一月<br>麻木工作。</p>
-<p>###十二月<br>买到了站票，等着回家过年。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1756,7 +1805,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">63</span>
+                  <span class="site-state-item-count">67</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1769,7 +1818,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-count">35</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
@@ -1822,7 +1871,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
